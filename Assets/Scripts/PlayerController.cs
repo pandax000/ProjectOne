@@ -55,6 +55,12 @@ public class PlayerController : MonoBehaviour {
         } else {
             isFalling = false;
         }
+        // Falling animation
+        if (isFalling == true) {
+            anim.SetBool("isFalling", true);
+        } else {
+            anim.SetBool("isFalling", false);
+        }
         // Flip sprite
         if (inputX > 0) {
             transform.eulerAngles = new Vector3(0, 0, 0);
