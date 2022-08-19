@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour {
     // Input
     PlayerInputActions playerInput;
     float inputX;
+    bool isFalling;
     // Animation
     Animator anim;
 
@@ -48,6 +49,12 @@ public class PlayerController : MonoBehaviour {
         } else {
             anim.SetBool("isJumping", false);
         }
+        // Is player falling?
+        if (isGrounded == false && rb.velocity.y < 0) {
+            isFalling = true;
+        } else {
+            isFalling = false;
+        }
         // Flip sprite
         if (inputX > 0) {
             transform.eulerAngles = new Vector3(0, 0, 0);
@@ -74,7 +81,9 @@ public class PlayerController : MonoBehaviour {
     }
 
     void StopJump() {
-        rb.velocity = new Vector2(rb.velocity.x, gravity);
+        if (isFalling == false) {
+            rb.velocity = new Vector2(rb.velocity.x, gravity);
+        }
     }
 
     void Movement(float direction) {
